@@ -1,0 +1,42 @@
+#dvs{
+		width:555px;
+		height:400px;
+		border:solid 1px #EAEAEA;
+		border-radius: 10px;
+		padding:10px;
+		margin-top:10px;
+		overflow-y: scroll;
+
+	}
+
+
+.message{
+	display:none;
+}
+
+#btn-send,#btn-out{
+	
+	margin-top:10px;
+
+	}
+
+#area{
+	margin-top:10px;
+	resize:none;
+}
+
+.ps{
+	margin-top:10px;
+
+}
+
+.bg-danger,.bg-info{
+	border-radius: 10px;
+	padding:8px;
+}
+
+/* #num{
+	width:100px;
+	height:20px;
+	border:solid 1px red;
+} */

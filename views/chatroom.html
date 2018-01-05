@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title><%=title%></title>
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src='jquery/dist/jquery.min.js'></script>
+	<script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/chat.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">	
+			<h1>聊天室</h1>
+			<div id="num">
+				
+			</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 uname">
+				
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">昵称</label>
+				    <input type="text" name="uname" class="form-control " id="" placeholder="请输入昵称">
+				  </div>
+				  
+				  <button type="submit" class="btn btn-default" id="btn-uname">下一步</button>
+				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 message">
+				<div id="dvs">
+					
+				</div>
+
+				<textarea class="form-control" rows="3" id="area"></textarea>
+
+				<button class='btn btn-info' id='btn-send'>发送</button>
+				<!-- <button class="btn btn-danger" id="btn-out">退出</button> -->
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		// alert($);
+		
+	</script>
+
+	<script>
+		var socket = io.connect('http://localhost:3000');
+
+		var uname = '';
+		
+		$('#btn-uname').click(function(){
+	  		uname = $('input').val();
+
+	  		if(uname == '') return ;
+
+	  		$('.message').show();
+
+	  		$('.uname').hide();
+	  		
+	  		//向服务器发送昵称
+	  		socket.emit('uname',uname);	  		
+	  	})
+
+
+		var message = '';
+	  	$('#btn-send').click(function(){
+	  		message = $('textarea').val();
+
+	  		if(message == '') return;
+	  		//向服务器发送消息
+	  		socket.emit('message',message);
+
+	  		//发送之后清空输入框
+	  		$('textarea').val('');
+
+	  		
+	  	})
+
+	  /*	//退出登录
+	  	$('#btn-out').click(function(){
+	  		socket.on('disconnect',function(data){
+	  			console.log(data);
+
+	  		})
+	  	})*/
+
+	  	//接收服务器信息
+		socket.on('msg', function(data){
+			console.log(data);
+			var flag = data.uname == uname;
+			var mess = info(flag,data);
+
+			$('#dvs').append(mess);
+			
+		});
+
+		socket.on('num',function(data){
+			// console.log($('#num p'));
+			// 删除前一个
+			$('#num p:eq(0)').remove();
+
+			//显示当前人数
+			$('#num').append('<p class="text-muted">在线人数：'+data+'</p>');
+
+
+		})
+
+		//显示聊天信息
+		function info(flag,data)
+		{
+			if(flag){
+				str = '<div class="me"> <span class="label label-primary">'+data.uname+'&nbsp;&nbsp;'+data.time+'</span><p class="ps"><span class="bg-danger">'+data.message+'</span></p></div>'
+			}else{
+				str = '<div class="you"><span class="label label-success">'+data.uname+'&nbsp;&nbsp;'+data.time+'</span><p class="ps"><span class="bg-info">'+data.message+'</span></p></div>'
+			}
+
+			return str;
+		}
+
+	
+	
+	  
+
+
+
+	</script>
+</body>
+</html>
