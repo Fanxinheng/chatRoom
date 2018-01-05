@@ -5,7 +5,7 @@
 
 效果图：
 
-![20180105174905](http://ozsrs9z8f.bkt.clouddn.com/20180105174905.png))
+![20180105174905](http://ozsrs9z8f.bkt.clouddn.com/20180105174905.png)
 
 
 安装
