@@ -5,7 +5,7 @@
 
 效果图：
 
-![QQ截图20180105171837](E:\wamp\www\demo\chartoom\QQ截图20180105171837.png)
+![20180105174905](http://ozsrs9z8f.bkt.clouddn.com/20180105174905.png))
 
 
 安装
@@ -13,19 +13,12 @@
 ```sh
     $ git clone https://github.com/Fanxinheng/chatroom.git 
 ```
-```
-    $ cd chatroom
-```
-```sh
-    $ npm install
-```
-
 
 使用
 ----
 - 1
 ```sh
-    $ node chatroom.js
+   $ node chatroom.js
 ```
 - 2
 
